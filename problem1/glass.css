@@ -1,0 +1,34 @@
+div::before {
+    margin-left: -7px;
+    margin-top: -17px;
+    width: 140px;
+    height: 121px;
+    content: '';
+    background-color: black;
+    display: block;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+div {
+    margin-left: 100px;
+    width: 160px;
+    height: 50px;
+    background-color: white;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    border: 17px solid black;
+    border-left: 0;
+}
+
+div::after {
+    margin-left: -39%;
+    margin-top: 3%;
+    width: 240px;
+    height: 27px;
+    border-bottom-left-radius: 27px;
+    border-bottom-right-radius: 27px;
+    background-color: black;
+    display: block;
+    content: '';
+}

@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <style>
+            .gridDay {
+                border: 0.5px solid grey;
+                flex-direction:column;
+            }
+            
+            .name {
+                color: black;
+            }
+
+            .headerDay {
+                text-align: center;
+                color: grey;
+                font-size: 20px;
+            }
+
+            .headerText {
+                margin-bottom: 20%;
+            }
+
+            .picture {
+                width: 90%;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="display: flex">
+        <div id="Sunday" class="gridDay headerDay"><div class="headerText">SUN</div></div>
+        <div id="Monday" class="gridDay headerDay"><div class="headerText">MON</div></div>
+        <div id="Tuesday" class="gridDay headerDay"><div class="headerText">TUE</div></div>
+        <div id="Wednesday" class="gridDay headerDay"><div class="headerText">WED</div></div>
+        <div id="Thursday" class="gridDay headerDay"><div class="headerText">THU</div></div>
+        <div id="Friday" class="gridDay headerDay"><div class="headerText">FRI</div></div>
+        <div id="Saturday" class="gridDay headerDay"><div class="headerText">SAT</div></div>
+        </div>
+    </body>
+</html>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js">
+</script>
+<script>
+    axios.get('http://uinames.com/api/?ext&amount=25').then((response) => {
+        console.log(response.data)
+        let Monday=[],Tuesday=[],Wednesday=[],Thursday=[],Friday=[],Saturday=[],Sunday=[]
+        let userInDay = { Sunday: [], Monday: [], Tuesday: [], Wednesday: [], Thursday: [], Friday: [], Saturday: []}
+        response.data.forEach((user) => {
+            let Day = new Date(user.birthday.mdy).getDay()
+            switch(Day) {
+                case 0: userInDay.Sunday.push(user); break
+                case 1: userInDay.Monday.push(user); break
+                case 2: userInDay.Tuesday.push(user); break
+                case 3: userInDay.Wednesday.push(user); break
+                case 4: userInDay.Thursday.push(user); break
+                case 5: userInDay.Friday.push(user); break
+                case 6: userInDay.Saturday.push(user); break
+            }
+        })
+        Object.keys(userInDay).forEach(day => {
+            userInDay[day].forEach(user => {
+                var img = document.createElement("IMG");
+                var p = document.createElement("P")
+                p.innerHTML = user.name
+                p.className = "name"
+                img.src = user.photo
+                img.className = "picture"
+                document.getElementById(day).appendChild(img)
+                document.getElementById(day).appendChild(p)
+            })
+        })
+    })
+</script>
